@@ -73,7 +73,7 @@
         loveRating: document.getElementById('loveRating').value
       };
 
-      const res = await fetch('/send-email', {
+      const res = await fetch('https://shreuu-meow.onrender.com/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
