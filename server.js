@@ -39,7 +39,7 @@ app.post('/send-email', (req, res) => {
               <strong>😠 Angry Rating:</strong> <span style="color: #f44336;">${angryRating}/10</span><br>
               <strong>😍 Meowieess Rating:</strong> <span style="color: #9c27b0;">${loveRating}/10</span>
             </div>
-            <div style="margin-top: 25px; text-align: right; font-size: 16px; color: #555;">💌 From your Secret Admirer</div>
+            <div style="margin-top: 25px; text-align: right; font-size: 16px; color: #555;">💌 From your Meowieesss</div>
           </td>
         </tr>
       </table>
@@ -48,7 +48,7 @@ app.post('/send-email', (req, res) => {
 
   const mailOptions = {
     from: 'sahil.dayanand1112@gmail.com',
-    to: ['sahil.dayanand1112@gmail.com'],
+    to: ['sahil.dayanand1112@gmail.com','shreyagore68@gmail.com'],
     subject: `💕 Meow scratchss: ${topic}`,
     html: htmlContent,
     attachments: [{
