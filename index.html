@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meowiees Message</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      background-color: #fff0f5;
+      padding: 40px;
+    }
+
+    input, textarea {
+      width: 80%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .slider-box {
+      margin: 15px 0;
+    }
+
+    input[type="range"] {
+      width: 60%;
+    }
+
+    button {
+      padding: 10px 30px;
+      border: none;
+      background-color: hotpink;
+      color: white;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💌 Send Your meow meow Message 💌</h1>
+
+  <form id="loveForm">
+    <input type="text" id="topic" placeholder="Topic" required><br>
+    <textarea id="description" placeholder="Your Message..." required></textarea><br>
+
+    <div class="slider-box">
+      😠 Angry Rating:
+      <input type="range" id="angryRating" min="0" max="10" value="5" oninput="document.getElementById('angryValue').innerText = this.value">
+      <span id="angryValue">5</span>
+    </div>
+
+    <div class="slider-box">
+      😍 Meowiees Rating:
+      <input type="range" id="loveRating" min="0" max="10" value="5" oninput="document.getElementById('loveValue').innerText = this.value">
+      <span id="loveValue">5</span>
+    </div>
+
+    <button type="submit">Send😻</button>
+  </form>
+
+  <p id="statusMsg"></p>
+
+  <script>
+    document.getElementById('loveForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const payload = {
+        topic: document.getElementById('topic').value,
+        description: document.getElementById('description').value,
+        angryRating: document.getElementById('angryRating').value,
+        loveRating: document.getElementById('loveRating').value
+      };
+
+      const res = await fetch('/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await res.text();
+      document.getElementById('statusMsg').innerText = result;
+    });
+  </script>
+</body>
+</html>
