@@ -48,7 +48,7 @@ app.post('/send-email', (req, res) => {
 
   const mailOptions = {
     from: 'sahil.dayanand1112@gmail.com',
-    to: ['sahil.dayanand1112@gmail.com','shreyagore68@gmail.com'],
+    to: ['sahil.dayanand1112@gmail.com'],
     subject: `💕 Meow scratchss: ${topic}`,
     html: htmlContent,
     attachments: [{
