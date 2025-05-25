@@ -53,7 +53,7 @@ app.post('/send-email', (req, res) => {
     html: htmlContent,
     attachments: [{
       filename: 'cat1.png',
-      path: path.join(__dirname, 'cat.png'),
+      path: path.join(__dirname, 'cat1.png'),
       cid: 'catimage'
     }]
   };
