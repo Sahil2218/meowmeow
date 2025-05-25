@@ -52,7 +52,7 @@ app.post('/send-email', (req, res) => {
     subject: `💕 Meow scratchss: ${topic}`,
     html: htmlContent,
     attachments: [{
-      filename: 'cat.png',
+      filename: 'cat1.png',
       path: path.join(__dirname, 'cat.png'),
       cid: 'catimage'
     }]
