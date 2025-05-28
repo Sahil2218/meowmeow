@@ -6,14 +6,24 @@
     @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Pacifico&display=swap');
 
     body {
-      font-family: 'Comfortaa', cursive;
-      background: url('https://i.imgur.com/td6l6Zu.png') repeat;
-      background-size: 100px;
-      text-align: center;
-      padding: 40px;
-      background-color: #fff0f5;
-      color: #4a148c;
-    }
+  font-family: 'Comfortaa', cursive;
+  background: url('https://i.imgur.com/td6l6Zu.png') repeat-x;
+  background-size: 120px;
+  background-color: #fff0f5;
+  animation: movePaws 30s linear infinite;
+  text-align: center;
+  padding: 40px;
+  color: #4a148c;
+}
+
+@keyframes movePaws {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
 
     h1 {
       font-family: 'Pacifico', cursive;
@@ -33,7 +43,7 @@
       border: 3px dotted #ffb6c1;
     }
 
-    input, textarea {
+    input[type="text"], textarea {
       width: 85%;
       margin: 10px 0;
       padding: 12px;
@@ -46,10 +56,6 @@
     .slider-box {
       margin: 15px 0;
       font-size: 16px;
-    }
-
-    input[type="range"] {
-      width: 60%;
     }
 
     button {
@@ -71,6 +77,27 @@
       transform: scale(1.05);
     }
 
+    .heart-row {
+      display: inline-flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 5px;
+    }
+
+    .heart {
+      font-size: 24px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .heart:hover {
+      transform: scale(1.2);
+    }
+
+    .heart.selected {
+      color: red;
+    }
+
     #statusMsg {
       margin-top: 40px;
     }
@@ -86,16 +113,14 @@
 
     <div class="slider-box">
       😠 Angry Rating:
-      <input type="range" id="angryRating" min="0" max="10" value="5"
-             oninput="document.getElementById('angryValue').innerText = this.value">
-      <span id="angryValue">5</span>
+      <div id="angryHearts" class="heart-row"></div>
+      <input type="hidden" id="angryRating" value="5">
     </div>
 
     <div class="slider-box">
       😍 Meowiees Rating:
-      <input type="range" id="loveRating" min="0" max="10" value="5"
-             oninput="document.getElementById('loveValue').innerText = this.value">
-      <span id="loveValue">5</span>
+      <div id="loveHearts" class="heart-row"></div>
+      <input type="hidden" id="loveRating" value="5">
     </div>
 
     <button type="submit">💖 Send Meow 💖</button>
@@ -104,6 +129,38 @@
   <div id="statusMsg"></div>
 
   <script>
+    function createHeartRating(containerId, inputId, max = 10) {
+      const container = document.getElementById(containerId);
+      const input = document.getElementById(inputId);
+
+      for (let i = 1; i <= max; i++) {
+        const heart = document.createElement("span");
+        heart.innerHTML = "❤️";
+        heart.classList.add("heart");
+        heart.dataset.value = i;
+
+        heart.addEventListener("click", () => {
+          input.value = i;
+          [...container.children].forEach((h, index) => {
+            h.classList.toggle("selected", index < i);
+          });
+        });
+
+        container.appendChild(heart);
+      }
+
+      // Set default
+      input.value = 5;
+      [...container.children].forEach((h, index) => {
+        h.classList.toggle("selected", index < 5);
+      });
+    }
+
+    window.onload = () => {
+      createHeartRating("angryHearts", "angryRating");
+      createHeartRating("loveHearts", "loveRating");
+    };
+
     document.getElementById('loveForm').addEventListener('submit', async function (e) {
       e.preventDefault();
 
@@ -143,7 +200,6 @@
 
       document.getElementById('statusMsg').innerHTML = messageHTML;
 
-      // Optional: still send email
       await fetch('https://shreuu-meow.onrender.com/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
