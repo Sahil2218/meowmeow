@@ -24,27 +24,61 @@ const transporter = nodemailer.createTransport({
 app.post('/send-email', (req, res) => {
   const { topic, description, angryRating, loveRating } = req.body;
 
-  const htmlContent = `
-    <div style="background-color: #ffe4ec; padding: 30px; font-family: 'Comic Sans MS', cursive; border-radius: 12px;">
-      <table style="width: 100%; max-width: 600px; margin: auto; background-color: #fffafc; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-        <tr>
-          <td style="width: 50%; text-align: center; padding: 20px;">
-            <img src="cid:catimage" alt="Cute Cat" style="width: 100%; max-width: 250px; border-radius: 10px;">
-          </td>
-          <td style="width: 50%; padding: 20px; vertical-align: top;">
-            <div style="font-size: 18px; color: #e91e63; font-weight: bold; margin-bottom: 8px;">💕 Meow Message Alert 💕</div>
-            <div><strong>📌 Topic:</strong> <span style="color: #ff4081;">${topic}</span></div>
-            <div style="margin-top: 10px;"><strong>📝 Description:</strong><br><em>${description}</em></div>
-            <div style="margin-top: 15px;">
-              <strong>😠 Angry Rating:</strong> <span style="color: #f44336;">${angryRating}/10</span><br>
-              <strong>😍 Meowieess Rating:</strong> <span style="color: #9c27b0;">${loveRating}/10</span>
-            </div>
-            <div style="margin-top: 25px; text-align: right; font-size: 16px; color: #555;">💌 From your Meowieesss</div>
-          </td>
-        </tr>
-      </table>
+ const htmlContent = `
+  <div style="background: url('https://i.imgur.com/td6l6Zu.png'); background-size: cover; padding: 30px; font-family: 'Segoe UI', cursive; border-radius: 20px; position: relative;">
+    <div style="max-width: 650px; margin: auto; background-color: #fff0f5; border-radius: 20px; border: 5px dotted #ff69b4; box-shadow: 0 0 18px #ffb6c1; padding: 25px; position: relative;">
+    
+      <!-- Top Ribbon -->
+      <img src="https://i.imgur.com/q3iK1ld.png" alt="Ribbon" style="width: 80px; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); z-index: 1;">
+
+      <!-- Speech Bubble -->
+      <div style="background: #ffffff; border: 3px dashed #e91e63; border-radius: 20px; padding: 20px; margin-bottom: 20px; position: relative;">
+        <p style="font-size: 20px; color: #d81b60; font-weight: bold;">🐱 Meow Meow from your Baby!</p>
+        <p><strong>📌 Topic:</strong> <span style="color: #f50057;">${topic}</span></p>
+        <p><strong>📝 Description:</strong><br><em>${description}</em></p>
+
+        <!-- Animated Love Meter -->
+        <div style="margin-top: 15px;">
+          <div style="background-color: #ffe6ef; border-radius: 20px; overflow: hidden; height: 16px; box-shadow: inset 0 0 6px #f8bbd0;">
+            <div style="width: ${loveRating * 10}%; background: linear-gradient(90deg, #f06292, #ec407a); height: 100%; box-shadow: 0 0 10px #f06292;"></div>
+          </div>
+          <div style="font-size: 14px; color: #777; text-align: right;">💕 Love Meter: ${loveRating * 10}%</div>
+        </div>
+
+        <!-- Ratings -->
+        <div style="margin-top: 12px;">
+          <strong>😠 Angry Rating:</strong> <span style="color: #f44336;">${angryRating}/10</span><br>
+          <strong>😍 Meowieess Rating:</strong> <span style="color: #ab47bc;">${loveRating}/10</span>
+        </div>
+      </div>
+
+      <!-- Cat Image -->
+      <div style="text-align: center;">
+        <img src="cid:catimage" alt="Cute Cat" style="max-width: 240px; border-radius: 15px; box-shadow: 0 0 10px #f48fb1;">
+        <div style="font-size: 14px; color: #777; margin-top: 10px;">🐾 Your snuggle cat of love 🐾</div>
+      </div>
+
+      <!-- Divider -->
+      <hr style="border: none; border-top: 2px dotted #ec407a; margin: 25px 0;">
+
+      <!-- Floating Emoji Cloud -->
+      <div style="font-size: 24px; text-align: center; line-height: 2;">
+        😺💌💋🐾🌈✨😽💖😻🫶
+      </div>
+
+      <!-- Cute Quote -->
+      <blockquote style="font-style: italic; text-align: center; color: #666; margin-top: 20px;">
+        "You're the purr-fect part of my day." 🐾
+      </blockquote>
+
+      <!-- Signature -->
+      <div style="text-align: right; margin-top: 30px; font-family: 'Brush Script MT', cursive; font-size: 22px; color: #e91e63;">
+        Forever yours,<br>💘 Your Pawsome Love 💘
+      </div>
     </div>
-  `;
+  </div>
+`;
+
 
   const mailOptions = {
     from: 'sahil.dayanand1112@gmail.com',
