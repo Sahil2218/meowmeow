@@ -25,11 +25,11 @@ app.post('/send-email', (req, res) => {
   const { topic, description, angryRating, loveRating } = req.body;
 
  const htmlContent = `
-  <div style="background: url('https://i.imgur.com/td6l6Zu.png'); background-size: cover; padding: 30px; font-family: 'Segoe UI', cursive; border-radius: 20px; position: relative;">
+  <div style="background: url('2.png'); background-size: cover; padding: 30px; font-family: 'Segoe UI', cursive; border-radius: 20px; position: relative;">
     <div style="max-width: 650px; margin: auto; background-color: #fff0f5; border-radius: 20px; border: 5px dotted #ff69b4; box-shadow: 0 0 18px #ffb6c1; padding: 25px; position: relative;">
     
       <!-- Top Ribbon -->
-      <img src="https://i.imgur.com/q3iK1ld.png" alt="Ribbon" style="width: 80px; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); z-index: 1;">
+      <img src="image.png" alt="Ribbon" style="width: 80px; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); z-index: 1;">
 
       <!-- Speech Bubble -->
       <div style="background: #ffffff; border: 3px dashed #e91e63; border-radius: 20px; padding: 20px; margin-bottom: 20px; position: relative;">
