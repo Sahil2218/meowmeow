@@ -3,23 +3,49 @@
 <head>
   <title>Meowiees Message</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Pacifico&display=swap');
+
     body {
-      font-family: 'Comic Sans MS', cursive;
+      font-family: 'Comfortaa', cursive;
+      background: url('https://i.imgur.com/td6l6Zu.png') repeat;
+      background-size: 100px;
       text-align: center;
-      background-color: #fff0f5;
       padding: 40px;
+      background-color: #fff0f5;
+      color: #4a148c;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #e91e63;
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+
+    form {
+      background-color: #fffafc;
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 20px #f48fb1;
+      border: 3px dotted #ffb6c1;
     }
 
     input, textarea {
-      width: 80%;
+      width: 85%;
       margin: 10px 0;
-      padding: 10px;
-      border-radius: 10px;
+      padding: 12px;
+      border-radius: 12px;
       border: 1px solid #ccc;
+      font-size: 16px;
+      font-family: 'Comfortaa', cursive;
     }
 
     .slider-box {
       margin: 15px 0;
+      font-size: 16px;
     }
 
     input[type="range"] {
@@ -29,59 +55,102 @@
     button {
       padding: 10px 30px;
       border: none;
-      background-color: hotpink;
+      background-color: #ff69b4;
       color: white;
       font-weight: bold;
-      border-radius: 12px;
+      border-radius: 20px;
+      font-size: 18px;
+      font-family: 'Pacifico', cursive;
       cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    button:hover {
+      background-color: #ec407a;
+      transform: scale(1.05);
+    }
+
+    #statusMsg {
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
-  <h1>💌 Send Your meow meow Message 💌</h1>
+  <h1>💌 Send Your Meowiees Message 💌</h1>
 
   <form id="loveForm">
-    <input type="text" id="topic" placeholder="Topic" required><br>
-    <textarea id="description" placeholder="Your Message..." required></textarea><br>
+    <input type="text" id="topic" placeholder="🐾 Topic (e.g., Why I love you)" required><br>
+    <textarea id="description" rows="4" placeholder="😽 Your fluffy message goes here..." required></textarea><br>
 
     <div class="slider-box">
       😠 Angry Rating:
-      <input type="range" id="angryRating" min="0" max="10" value="5" oninput="document.getElementById('angryValue').innerText = this.value">
+      <input type="range" id="angryRating" min="0" max="10" value="5"
+             oninput="document.getElementById('angryValue').innerText = this.value">
       <span id="angryValue">5</span>
     </div>
 
     <div class="slider-box">
       😍 Meowiees Rating:
-      <input type="range" id="loveRating" min="0" max="10" value="5" oninput="document.getElementById('loveValue').innerText = this.value">
+      <input type="range" id="loveRating" min="0" max="10" value="5"
+             oninput="document.getElementById('loveValue').innerText = this.value">
       <span id="loveValue">5</span>
     </div>
 
-    <button type="submit">Send😻</button>
+    <button type="submit">💖 Send Meow 💖</button>
   </form>
 
-  <p id="statusMsg"></p>
+  <div id="statusMsg"></div>
 
   <script>
     document.getElementById('loveForm').addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      const payload = {
-        topic: document.getElementById('topic').value,
-        description: document.getElementById('description').value,
-        angryRating: document.getElementById('angryRating').value,
-        loveRating: document.getElementById('loveRating').value
-      };
+      const topic = document.getElementById('topic').value;
+      const description = document.getElementById('description').value;
+      const angryRating = document.getElementById('angryRating').value;
+      const loveRating = document.getElementById('loveRating').value;
 
-      const res = await fetch('https://shreuu-meow.onrender.com/send-email', {
+      const messageHTML = `
+        <div style="background-color: #ffe4ec; padding: 30px; font-family: 'Segoe UI', cursive; border-radius: 20px; max-width: 700px; margin: 30px auto;">
+          <div style="background-color: #fff0f5; border: 4px dotted #f06292; padding: 20px; border-radius: 15px; box-shadow: 0 0 12px #f48fb1;">
+            <h2 style="color: #e91e63;">🐾 Meowiees Message Alert 🐾</h2>
+            <p><strong>📌 Topic:</strong> <span style="color: #d81b60;">${topic}</span></p>
+            <p><strong>📝 Description:</strong> <em>${description}</em></p>
+
+            <div style="margin-top: 12px;">
+              <strong>😠 Angry Rating:</strong> <span style="color: #f44336;">${angryRating}/10</span><br>
+              <strong>😍 Meowieess Rating:</strong> <span style="color: #ab47bc;">${loveRating}/10</span>
+            </div>
+
+            <div style="margin-top: 15px;">
+              <div style="background: #ffebef; border-radius: 20px; height: 16px; overflow: hidden;">
+                <div style="width: ${loveRating * 10}%; height: 100%; background: linear-gradient(to right, #f06292, #ec407a); box-shadow: 0 0 8px #ec407a;"></div>
+              </div>
+              <div style="font-size: 14px; color: #777;">💕 Love Meter: ${loveRating * 10}%</div>
+            </div>
+
+            <div style="font-size: 22px; text-align: center; margin-top: 20px;">😽💌🐾✨💖😺</div>
+            <p style="text-align: center; font-style: italic; color: #666;">"You're the snuggle I never knew I needed."</p>
+
+            <div style="margin-top: 25px; text-align: right; font-size: 18px; font-family: 'Brush Script MT', cursive; color: #e91e63;">
+              💘 Forever yours,<br>– Your Meowieesss
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('statusMsg').innerHTML = messageHTML;
+
+      // Optional: still send email
+      await fetch('https://shreuu-meow.onrender.com/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({ topic, description, angryRating, loveRating })
       });
-
-      const result = await res.text();
-      document.getElementById('statusMsg').innerText = result;
     });
   </script>
+
 </body>
 </html>
