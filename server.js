@@ -25,55 +25,58 @@ app.post('/send-email', (req, res) => {
   const { topic, description, angryRating, loveRating } = req.body;
 
  const htmlContent = `
-     <div style="max-width: 650px; margin: auto; background-color: #fff0f5; border-radius: 20px; border: 5px dotted #ff69b4; box-shadow: 0 0 18px #ffb6c1; padding: 25px; position: relative;">
-    
-      
-      <!-- Speech Bubble -->
-      <div style="background: #ffffff; border: 3px dashed #e91e63; border-radius: 20px; padding: 20px; margin-bottom: 20px; position: relative;">
-        <p style="font-size: 20px; color: #d81b60; font-weight: bold;">🐱 Meow Meow from your Baby!</p>
-        <p><strong>📌 Topic:</strong> <span style="color: #f50057;">${topic}</span></p>
-        <p><strong>📝 Description:</strong><br><em>${description}</em></p>
+   <div style="max-width: 640px; margin: auto; background: #fdfdfc; border-radius: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); padding: 24px; font-family: 'Segoe UI', sans-serif;">
 
-        <!-- Animated Love Meter -->
-        <div style="margin-top: 15px;">
-          <div style="background-color: #ffe6ef; border-radius: 20px; overflow: hidden; height: 16px; box-shadow: inset 0 0 6px #f8bbd0;">
-            <div style="width: ${loveRating * 10}%; background: linear-gradient(90deg, #f06292, #ec407a); height: 100%; box-shadow: 0 0 10px #f06292;"></div>
-          </div>
-          <div style="font-size: 14px; color: #777; text-align: right;">💕 Love Meter: ${loveRating * 10}%</div>
-        </div>
+  <!-- Header -->
+  <div style="text-align: center; margin-bottom: 20px;">
+    <h2 style="color: #6c63ff; margin-bottom: 4px;">🌼 A Message from Your Baby Cat 🌼</h2>
+    <p style="color: #777; font-size: 14px;">Gentle words wrapped in tiny paws</p>
+  </div>
 
-        <!-- Ratings -->
-        <div style="margin-top: 12px;">
-          <strong>😠 Angry Rating:</strong> <span style="color: #f44336;">${angryRating}/10</span><br>
-          <strong>😍 Meowieess Rating:</strong> <span style="color: #ab47bc;">${loveRating}/10</span>
-        </div>
+  <!-- Content Block -->
+  <div style="background: #ffffff; border-radius: 12px; padding: 18px; border: 1px solid #e6e6e6;">
+    <p style="font-size: 16px; color: #333;"><strong>📌 Topic:</strong> <span style="color: #6c63ff;">${topic}</span></p>
+    <p style="margin-top: 8px;"><strong>📝 Description:</strong><br><em>${description}</em></p>
+
+    <!-- Love Meter -->
+    <div style="margin-top: 20px;">
+      <label style="font-weight: bold; color: #444;">💗 Love Meter</label>
+      <div style="background: #edf2f7; border-radius: 12px; height: 14px; overflow: hidden; margin-top: 5px;">
+        <div style="width: ${loveRating * 10}%; background: linear-gradient(90deg, #a0c4ff, #cdb4db); height: 100%;"></div>
       </div>
+      <div style="text-align: right; font-size: 12px; color: #888;">${loveRating * 10}%</div>
+    </div>
 
-      <!-- Cat Image -->
-      <div style="text-align: center;">
-        <img src="cid:catimage" alt="Cute Cat" style="max-width: 240px; border-radius: 15px; box-shadow: 0 0 10px #f48fb1;">
-        <div style="font-size: 14px; color: #777; margin-top: 10px;">🐾 Your snuggle cat of love 🐾</div>
-      </div>
-
-      <!-- Divider -->
-      <hr style="border: none; border-top: 2px dotted #ec407a; margin: 25px 0;">
-
-      <!-- Floating Emoji Cloud -->
-      <div style="font-size: 24px; text-align: center; line-height: 2;">
-        😺💌💋🐾🌈✨😽💖😻🫶
-      </div>
-
-      <!-- Cute Quote -->
-      <blockquote style="font-style: italic; text-align: center; color: #666; margin-top: 20px;">
-        "You're the purr-fect part of my day." 🐾
-      </blockquote>
-
-      <!-- Signature -->
-      <div style="text-align: right; margin-top: 30px; font-family: 'Brush Script MT', cursive; font-size: 22px; color: #e91e63;">
-        Forever yours,<br>💘 Your Pawsome Love 💘
-      </div>
+    <!-- Ratings -->
+    <div style="margin-top: 14px;">
+      <p><strong>😠 Angry Rating:</strong> <span style="color: #ef767a;">${angryRating}/10</span></p>
+      <p><strong>🐾 Meowiness Rating:</strong> <span style="color: #8eecf5;">${loveRating}/10</span></p>
     </div>
   </div>
+
+  <!-- Image -->
+  <div style="text-align: center; margin: 24px 0 12px;">
+    <img src="cid:catimage" alt="Cat Pic" style="max-width: 220px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+    <div style="color: #aaa; font-size: 13px; margin-top: 6px;">Your cozy cuddle buddy 🐱</div>
+  </div>
+
+  <!-- Divider -->
+  <hr style="border: none; border-top: 1px solid #ddd; margin: 28px 0;">
+
+  <!-- Cute Footer -->
+  <div style="text-align: center; font-size: 22px; line-height: 1.6;">
+    🐶🌙✨🐾💌🧸🍑🫶
+  </div>
+  <blockquote style="font-style: italic; text-align: center; color: #777; margin-top: 18px;">
+    "You're the coziest corner of my heart." 🧸
+  </blockquote>
+
+  <!-- Signature -->
+  <div style="text-align: right; margin-top: 26px; font-family: 'Brush Script MT', cursive; font-size: 20px; color: #6c63ff;">
+    Always yours,<br>🌸 Your Calm Kitty 🌸
+  </div>
+</div>
+
 `;
 
 
